@@ -1,0 +1,30 @@
+apiVersion: v2
+name: tributech-assignment-chart
+description: Umbrella helm chart for the Tributech assignment. This chart contains Nginx Ingress, Keycloak, PostgreSQL, pgAdmin and the frontend application.
+type: application
+
+# This is the chart version. This version number should be incremented each time you make changes
+# to the chart and its templates, including the app version.
+# Versions are expected to follow Semantic Versioning (https://semver.org/)
+version: 0.1.0
+
+# This is the version number of the application being deployed. This version number should be
+# incremented each time you make changes to the application. Versions are not expected to
+# follow Semantic Versioning. They should reflect the version the application is using.
+# It is recommended to use it with quotes.
+appVersion: "1.16.0"
+
+dependencies:
+  - name: keycloak
+    version: "24.4.11"
+    repository: "https://charts.bitnami.com/bitnami"
+  - name: postgresql
+    version: "16.4.16"
+    repository: "https://charts.bitnami.com/bitnami"
+  - name: pgadmin
+    version: "0.1.0"
+    repository: file://./charts/pgadmin
+  - name: nginx-ingress-controller
+    version: "11.6.11"
+    repository: "https://charts.bitnami.com/bitnami"
+  # TODO add frontend application chart

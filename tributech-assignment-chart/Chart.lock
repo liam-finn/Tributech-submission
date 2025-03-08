@@ -1,0 +1,15 @@
+dependencies:
+- name: keycloak
+  repository: https://charts.bitnami.com/bitnami
+  version: 24.4.11
+- name: postgresql
+  repository: https://charts.bitnami.com/bitnami
+  version: 16.4.16
+- name: pgadmin
+  repository: file://./charts/pgadmin
+  version: 0.1.0
+- name: nginx-ingress-controller
+  repository: https://charts.bitnami.com/bitnami
+  version: 11.6.11
+digest: sha256:5cd70374bece9e01c36617e254cbc5bcd80dbe7c24105470e2168d2c31dbeffb
+generated: "2025-03-07T15:59:57.8155545+01:00"
