@@ -1,13 +1,13 @@
 # Default values for pgadmin.
 # This is a YAML-formatted file.
-# Declare variables to be passed into your templates.
 
 # This will set the replicaset count more information can be found here: https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/
 replicaCount: 1
 
 # This sets the container image more information can be found here: https://kubernetes.io/docs/concepts/containers/images/
 image:
-  repository: nginx
+  registry: docker.io
+  repository: dpage/pgadmin4
   # This sets the pull policy for images.
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
@@ -55,6 +55,8 @@ service:
   type: ClusterIP
   # This sets the ports more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/#field-spec-ports
   port: 80
+  targetPort: 80
+  portName: http
 
 # This block is for setting up the ingress for more information can be found here: https://kubernetes.io/docs/concepts/services-networking/ingress/
 ingress:
@@ -121,3 +123,31 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+## @param existingSecret Name of existing secret to use for default pgadmin credentials. `env.password` will be ignored and picked up from this secret.
+##
+existingSecret: ""
+## @param secretKeys.pgadminPasswordKey Name of key in existing secret to use for default pgadmin credentials. Only used when `existingSecret` is set.
+##
+secretKeys:
+  pgadminPasswordKey: password
+
+## pgAdmin4 startup configuration
+## Values in here get injected as environment variables
+env:
+  email: placeholder@domain.com
+  password: defaultpassword
+  # pgpassfile: /var/lib/pgadmin/storage/pgadmin/file.pgpass
+
+  # set context path for application (e.g. /pgadmin4/*)
+  # contextPath: /pgadmin4
+
+  ## If True, allows pgAdmin4 to create session cookies based on IP address
+  ## Ref: https://www.pgadmin.org/docs/pgadmin4/latest/config_py.html
+  ##
+  enhanced_cookie_protection: "False"
+
+  ## Add custom environment variables that will be injected to deployment
+  ## Ref: https://www.pgadmin.org/docs/pgadmin4/latest/container_deployment.html
+  ##
+  variables: []

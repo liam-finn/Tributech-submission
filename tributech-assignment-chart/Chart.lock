@@ -5,11 +5,11 @@ dependencies:
 - name: postgresql
   repository: https://charts.bitnami.com/bitnami
   version: 16.4.16
-- name: pgadmin
-  repository: file://./charts/pgadmin
-  version: 0.1.0
+- name: pgadmin4
+  repository: https://helm.runix.net
+  version: 1.35.0
 - name: nginx-ingress-controller
   repository: https://charts.bitnami.com/bitnami
   version: 11.6.11
-digest: sha256:5cd70374bece9e01c36617e254cbc5bcd80dbe7c24105470e2168d2c31dbeffb
-generated: "2025-03-07T15:59:57.8155545+01:00"
+digest: sha256:6bbc8c233ab20a614b5f0af98743bed9966a3501f75aae72bc42737d4d70623c
+generated: "2025-03-08T15:42:02.4262082+01:00"

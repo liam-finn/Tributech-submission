@@ -21,9 +21,9 @@ dependencies:
   - name: postgresql
     version: "16.4.16"
     repository: "https://charts.bitnami.com/bitnami"
-  - name: pgadmin
-    version: "0.1.0"
-    repository: file://./charts/pgadmin
+  - name: pgadmin4
+    version: "1.35.0"
+    repository: "https://helm.runix.net"
   - name: nginx-ingress-controller
     version: "11.6.11"
     repository: "https://charts.bitnami.com/bitnami"
