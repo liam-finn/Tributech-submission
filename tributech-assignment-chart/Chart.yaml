@@ -27,4 +27,6 @@ dependencies:
   - name: nginx-ingress-controller
     version: "11.6.11"
     repository: "https://charts.bitnami.com/bitnami"
-  # TODO add frontend application chart
+  - name: frontend
+    version: "0.1.0"
+    repository: "file://./charts/frontend"
