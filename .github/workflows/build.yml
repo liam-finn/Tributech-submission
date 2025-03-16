@@ -12,6 +12,6 @@ jobs:
       uses: azure/setup-helm@v1
 
     - name: 'Build'
-      run: 'helm package .\tributech-assignment-chart\ -u --version "0.1.${{ github.run_number}}"'
+      run: 'helm package .\tributech-assignment-chart\ -u'
     - name: 'Deploy'
       run: 'helm install tributech .\chart-0.1.0.tgz'
