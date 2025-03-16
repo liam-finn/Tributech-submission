@@ -1,5 +1,5 @@
 apiVersion: v2
-name: tributech-assignment-chart
+name: chart
 description: Umbrella helm chart for the Tributech assignment. This chart contains Nginx Ingress, Keycloak, PostgreSQL, pgAdmin and the frontend application.
 type: application
 

@@ -6,12 +6,12 @@ jobs:
     runs-on: 'ubuntu-latest'
 
     steps:
-    - uses: 'actions/checkout@v1'
+    - uses: 'actions/checkout@v2'
 
-    - name: 'Test'
-      run: 'echo "ok"'
+    - name: Install Helm
+      uses: azure/setup-helm@v1
 
     - name: 'Build'
-      run: 'helm package .'
+      run: 'helm package .\tributech-assignment-chart\ -u --version "0.1.${{ github.run_number}}"'
     - name: 'Deploy'
-      run: 'helm install tribu .\tributech-assignment-chart-0.1.0.tgz'
+      run: 'helm install tributech .\chart-0.1.0.tgz'
