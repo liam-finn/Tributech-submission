@@ -1,0 +1,17 @@
+name: 'Push'
+on: ['push']
+
+jobs:
+  build:
+    runs-on: 'ubuntu-latest'
+
+    steps:
+    - uses: 'actions/checkout@v1'
+
+    - name: 'Test'
+      run: 'echo "ok"'
+
+    - name: 'Build'
+      run: 'helm package .'
+    - name: 'Deploy'
+      run: 'helm install tribu .\tributech-assignment-chart-0.1.0.tgz'

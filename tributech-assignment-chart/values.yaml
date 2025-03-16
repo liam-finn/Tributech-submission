@@ -27,20 +27,21 @@ keycloak:
 
 postgresql:
   enabled: true
+  username: keycloak
+  password: keycloakpassword
+  database: keycloakdb
 
 pgadmin4:
   enabled: true
-  service:
-    type: ClusterIP
-    port: 80
+  admin:
+    email: admin@example.com
+    password: adminpassword
   ingress:
     enabled: true
-    annotations:
-      nginx.ingress.kubernetes.io/rewrite-target: /
     hosts:
       - host: pgadmin.local
         paths:
-          - /
+          - /pgadmin
 
 frontend:
   image:
@@ -48,14 +49,9 @@ frontend:
     repository: tributech-ui-oauth-sample
     tag: 0.1.0
     pullPolicy: IfNotPresent
-  service:
-    type: ClusterIP
-    port: 80
   ingress:
     enabled: true
-    annotations:
-      nginx.ingress.kubernetes.io/rewrite-target: /
     hosts:
       - host: frontend.local
         paths:
-          - /
+          - /frontend
