@@ -51,7 +51,7 @@ package_and_install_chart() {
     helm package "$chart_path" -u --version "$new_version"
     local chart_file
     chart_file=$(ls *-"$new_version".tgz)
-    helm install tributech-assignment "$chart_file"
+    helm upgrade tributech-assignment "$chart_file"
     rm "$chart_file"
     echo "Helm chart packaged and installed successfully."
 }

@@ -6,10 +6,10 @@ keycloak:
   postgresql:
     enabled: false #disable the internal database, allowing more config if needed for pgadmin
   externalDatabase:
-    host: myexternalhost
-    user: myuser
-    password: mypassword
-    database: mydatabase
+    host: tributech-assignment-postgresql.default.svc.cluster.local
+    user: keycloak
+    password: keycloakpassword
+    database: keycloakdb
     port: 5432
   service:
     type: ClusterIP
