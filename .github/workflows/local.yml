@@ -3,7 +3,7 @@ name: Helm Package and Install
 on:
     push:
         branches:
-            - main
+            - disable
 
 jobs:
     helm:

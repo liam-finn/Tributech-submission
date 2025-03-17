@@ -1,5 +1,3 @@
-global:
-
 nginx-ingress-controller:
   enabled: true
 
@@ -23,7 +21,8 @@ keycloak:
     hosts:
       - host: keycloak.local
         paths:
-          - /auth
+          - path: /auth
+            pathType: ImplementationSpecific
 
 postgresql:
   enabled: true
@@ -41,11 +40,12 @@ pgadmin4:
     hosts:
       - host: pgadmin.local
         paths:
-          - /pgadmin
+          - path: /pgadmin
+            pathType: ImplementationSpecific
 
 frontend:
   image:
-    registry: localhost:5000
+    registry: 172.31.121.140:5000
     repository: tributech-ui-oauth-sample
     tag: 0.1.0
     pullPolicy: IfNotPresent
@@ -54,4 +54,5 @@ frontend:
     hosts:
       - host: frontend.local
         paths:
-          - /frontend
+          - path: /frontend
+            pathType: ImplementationSpecific
