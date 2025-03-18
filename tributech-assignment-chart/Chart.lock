@@ -8,9 +8,6 @@ dependencies:
 - name: pgadmin4
   repository: https://helm.runix.net
   version: 1.35.0
-- name: nginx-ingress-controller
-  repository: https://charts.bitnami.com/bitnami
-  version: 11.6.11
 - name: frontend
   repository: file://./charts/frontend
   version: 0.1.0
