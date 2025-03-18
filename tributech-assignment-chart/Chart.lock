@@ -11,5 +11,5 @@ dependencies:
 - name: frontend
   repository: file://./charts/frontend
   version: 0.1.0
-digest: sha256:a732080b6bc2e2ea122bbc29c52439669437f12fa1418d2e2eeac70965be922e
-generated: "2025-03-09T11:26:35.9680469+01:00"
+digest: sha256:ead156ce99651c57a6ad3f1675151d7677e3911cf1ba0fad11647f1d8deeaf4c
+generated: "2025-03-18T15:31:40.983014683+01:00"

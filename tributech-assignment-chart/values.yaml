@@ -3,7 +3,7 @@ keycloak:
   postgresql:
     enabled: false #disable the internal database, allowing more config if needed for pgadmin
   externalDatabase:
-    host: tributech-assignment-postgresql.default.svc.cluster.local
+    host: tributech-assignment-postgresql.tributech.svc.cluster.local
     user: keycloak
     password: keycloakpassword
     database: keycloakdb
@@ -18,32 +18,31 @@ keycloak:
     hosts:
       - host: keycloak.local
         paths:
-          - path: /auth
+          - path: /
             pathType: ImplementationSpecific
 
 postgresql:
-  enabled: true
-  username: keycloak
-  password: keycloakpassword
-  database: keycloakdb
+  auth:
+    username: "keycloak"
+    password: "keycloakpassword"
+    database: "keycloakdb"
 
 pgadmin4:
   enabled: true
-  admin:
-    email: admin@example.com
-    password: adminpassword
+  env:
+    email: user@example.com
+    password: ExtraSuperSecret
   ingress:
     enabled: true
     hosts:
       - host: pgadmin.local
         paths:
-          - path: /pgadmin
+          - path: /
             pathType: ImplementationSpecific
 
 frontend:
   image:
-    registry: 172.31.121.140:5000
-    repository: tributech-ui-oauth-sample
+    repository: liamfinn/tributech-frontend
     tag: 0.1.0
     pullPolicy: IfNotPresent
   ingress:
@@ -51,5 +50,5 @@ frontend:
     hosts:
       - host: website.local
         paths:
-          - path: /frontend
+          - path: /
             pathType: ImplementationSpecific
