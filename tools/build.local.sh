@@ -44,6 +44,16 @@ increment_version() {
     echo "$major.$minor.$patch"
 }
 
+# Function to build and push Docker image
+build_and_push_docker_image() {
+    local image_name="liamfinn/tributech-frontend:$LATEST_VERSION"
+    local dockerfile_path="/mnt/e/git-repos/tributech-ui-oauth-sample/"
+    echo "Building Docker image $image_name"
+    docker build -t "$image_name" "$dockerfile_path"
+    docker push "$image_name"
+    echo "Docker image pushed successfully."
+}
+
 # Function to package and install the Helm chart
 package_and_install_chart() {
     local chart_path=$1
@@ -53,10 +63,10 @@ package_and_install_chart() {
     chart_file=$(ls *-"$new_version".tgz)
     
     if helm ls --namespace tributech --all --short | grep -q "^tributech-assignment$"; then
-        helm upgrade tributech-assignment "$chart_file" --namespace tributech
+        helm upgrade tributech-assignment "$chart_file" --namespace tributech --set frontend.image.tag="$LATEST_VERSION"
         echo "Helm chart upgraded successfully."
     else
-        helm install tributech-assignment "$chart_file" --namespace tributech
+        helm install tributech-assignment "$chart_file" --namespace tributech --set frontend.image.tag="$LATEST_VERSION"
         echo "Helm chart installed successfully."
     fi
     
@@ -71,4 +81,9 @@ echo "Latest version from new_version.txt is $LATEST_VERSION"
 NEW_VERSION=$(increment_version "$LATEST_VERSION" "$INCREMENT_TYPE")
 echo "New version is $NEW_VERSION"
 echo "$NEW_VERSION" > ./new_version.txt
+
+# Build and push Docker image
+build_and_push_docker_image
+
+# Package and install Helm chart
 package_and_install_chart "$CHART_PATH" "$NEW_VERSION"

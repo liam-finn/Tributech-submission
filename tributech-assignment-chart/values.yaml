@@ -10,11 +10,13 @@ keycloak:
     port: 5432
   service:
     type: ClusterIP
-    port: 8080 #TODO https
+    port: 8080
   ingress:
     enabled: true
     annotations:
       nginx.ingress.kubernetes.io/rewrite-target: /
+      cert-manager.io/cluster-issuer: "selfsigned-cluster-issuer"
+    tls: true
     hosts:
       - host: keycloak.local
         paths:
@@ -39,12 +41,37 @@ pgadmin4:
         paths:
           - path: /
             pathType: ImplementationSpecific
-
+  serverDefinitions:
+    enabled: true
+    servers:
+      firstServer:
+        Name: "Tributech Assignment PostgreSQL"
+        Group: "Servers"
+        Port: 5432
+        Username: "postgres"
+        Host: "tributech-assignment-postgresql.tributech.svc.cluster.local"
+        SSLMode: "prefer"
+        MaintenanceDB: "postgres"
+        pgpass: "/etc/pgpass/pgpass"
+  extraVolumeMounts:
+    - name: pgpass-secret
+      mountPath: /etc/pgpass
+      readOnly: true
+  extraVolumes:
+    - name: pgpass-secret
+      secret:
+        secretName: tributech-assignment-postgresql
+        items:
+          - key: postgres-password
+            path: pgpass
+        
 frontend:
   image:
     repository: liamfinn/tributech-frontend
     tag: 0.1.0
     pullPolicy: IfNotPresent
+  imagePullSecrets:
+    - name: regcred
   ingress:
     enabled: true
     hosts:
