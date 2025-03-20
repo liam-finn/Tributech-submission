@@ -1,7 +1,7 @@
 keycloak:
   enabled: true
   postgresql:
-    enabled: false #disable the internal database, allowing more config if needed for pgadmin
+    enabled: false
   externalDatabase:
     host: tributech-assignment-postgresql.tributech.svc.cluster.local
     user: keycloak
@@ -15,13 +15,20 @@ keycloak:
     enabled: true
     annotations:
       nginx.ingress.kubernetes.io/rewrite-target: /
-      cert-manager.io/cluster-issuer: "selfsigned-cluster-issuer"
     tls: true
     hosts:
       - host: keycloak.local
         paths:
           - path: /
             pathType: ImplementationSpecific
+  extraStartupArgs: "--import-realm"
+  extraVolumes:
+    - name: keycloak-realm
+      configMap:
+        name: keycloak-realm-configmap
+  extraVolumeMounts:
+    - name: keycloak-realm
+      mountPath: /opt/bitnami/keycloak/data/import
 
 postgresql:
   auth:
@@ -68,10 +75,7 @@ pgadmin4:
 frontend:
   image:
     repository: liamfinn/tributech-frontend
-    tag: 0.1.0
     pullPolicy: IfNotPresent
-  imagePullSecrets:
-    - name: regcred
   ingress:
     enabled: true
     hosts:
