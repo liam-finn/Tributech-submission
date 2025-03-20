@@ -49,6 +49,22 @@ Follow these steps to set up and test the Helm chart locally, it should be noted
     minikube addons enable metrics-server
     minikube addons enable dashboard
     ```
+    - Another step was to configure the local hostnames
+    - This command will point the .local domain to the minikube dns server:
+    ```powershell
+    Add-DnsClientNrptRule -Namespace ".local" -NameServers "172.26.xxx.xxx"
+    ```
+    - Also the hosts can be added here: C:\Windows\System32\drivers\etc\hosts
+    [minikube ip] [hostname]
+    # Minikube hosts
+    172.26.xxx.xxx keycloak.local
+    172.26.xxx.xxx pgadmin.local
+    172.26.xxx.xxx website.local
+
+    - If needed, it is also possible that the wsl network switch is different from the one used by minikube. To allow communication between the two switches this command can be used:
+    ```powershell
+    Get-NetIPInterface | where {$_.InterfaceAlias -eq 'vEthernet (WSL)' -or $_.InterfaceAlias -eq 'vEthernet (Default Switch)'} | Set-NetIPInterface -Forwarding Enabled -Verbose 
+    ```
 
 2. **Deploying the Helm chart:**
     - There is a script in this repository that will package and install the helm chart. It is located under tools -> build.local.sh.
@@ -86,6 +102,14 @@ To deploy the Helm chart to our Kubernetes infrastructure, follow these steps:
     helm package /helm-chart -u
     helm install tributech-assignment "$path_to_chart_file" --namespace tributech -f values.yaml --create-namespace
     ```
+
+# Future work
+Given the time constraint I had given my illness, here are a list of topics I would have worked on next
+1. Add more template files to the umbrella chart for secrets and configmap resources. Some values in the values yaml I think could be moved to secrets generated when installing the chart
+2. Set up a proper automated workflow for the building docker image, packaging chart, installing chart and testing deployed resources
+3. Better configure the container health checks to ensure there is no conflicts between the services on startup if another is not ready
+4. Add simple monitoring stack
+5. Remove all non-applicable values from the charts default values, such as the docker image repository
 
 # Screenshots of running system
 ## Pods
