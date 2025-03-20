@@ -55,12 +55,13 @@ Follow these steps to set up and test the Helm chart locally, it should be noted
     Add-DnsClientNrptRule -Namespace ".local" -NameServers "172.26.xxx.xxx"
     ```
     - Also the hosts can be added here: C:\Windows\System32\drivers\etc\hosts
+    ```text
     [minikube ip] [hostname]
     # Minikube hosts
     172.26.xxx.xxx keycloak.local
     172.26.xxx.xxx pgadmin.local
     172.26.xxx.xxx website.local
-
+    ```
     - If needed, it is also possible that the wsl network switch is different from the one used by minikube. To allow communication between the two switches this command can be used:
     ```powershell
     Get-NetIPInterface | where {$_.InterfaceAlias -eq 'vEthernet (WSL)' -or $_.InterfaceAlias -eq 'vEthernet (Default Switch)'} | Set-NetIPInterface -Forwarding Enabled -Verbose 
