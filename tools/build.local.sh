@@ -97,7 +97,7 @@ package_and_install_chart() {
         echo "Helm chart installed successfully."
     fi
     
-    rm "$chart_file"
+    #rm "$chart_file"
 }
 # Arguments
 # $1: Increment type (M, m, p)
@@ -114,7 +114,7 @@ echo "New version is $NEW_VERSION"
 echo "$NEW_VERSION" > ./new_version.txt
 
 # Check and install required tools
-check_and_install_tools
+#check_and_install_tools
 
 # Build and push Docker image if the --build flag is provided
 if [[ "$2" == "--build" ]]; then
