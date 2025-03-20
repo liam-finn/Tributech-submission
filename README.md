@@ -78,3 +78,29 @@ To deploy the Helm chart to our Kubernetes infrastructure, follow these steps:
         - frontend.image.repository
         - frontend.ImagePullSecrets
 
+## **Install**
+    - package and install the chart using: 
+    ```bash
+    helm package /helm-chart -u
+    helm install tributech-assignment "$path_to_chart_file" --namespace tributech -f values.yaml --create-namespace
+    ```
+
+# Screenshots of running system
+## Pods
+![pods](images/pods.png)
+
+## Services
+![services](images/services.png)
+
+## Ingress
+![Ingress](images/Ingress.png)
+
+## Keycloak
+![keycloak_realm_client](images/keycloak_realm_client.png)
+
+## PgAdmin
+![pgadmin](images/pgadmin.png)
+![pgadmin_server](images/pgadmin_server.png)
+
+## Website
+![website_auth_true](images/website_auth_true.png)
