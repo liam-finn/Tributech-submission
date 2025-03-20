@@ -1,6 +1,6 @@
 apiVersion: v2
 name: chart
-description: Umbrella helm chart for the Tributech assignment. This chart contains Nginx Ingress, Keycloak, PostgreSQL, pgAdmin and the frontend application.
+description: Umbrella helm chart for the Tributech assignment. This chart contains Keycloak, PostgreSQL, pgAdmin and the frontend application.
 type: application
 
 # This is the chart version. This version number should be incremented each time you make changes
